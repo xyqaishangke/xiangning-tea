@@ -25,8 +25,8 @@
       </a>
       <button class="menu" type="button" aria-expanded="false" aria-controls="navigation" hidden>菜单 <span aria-hidden="true">☰</span></button>
       <nav id="navigation" class="navigation" aria-label="主导航">
-        <a href="#about">关于香宁</a>
         <a href="#collection">一叶茶集</a>
+        <a href="#about">关于香宁</a>
         <a href="#banna">版纳茶韵</a>
         <a href="#culture">品茶知味</a>
         <a class="nav-contact" href="#contact">联系香宁 <span aria-hidden="true">↗</span></a>
@@ -41,32 +41,33 @@
         <p class="eyebrow hero-eyebrow">西双版纳 <span aria-hidden="true">／</span> XISHUANGBANNA</p>
         <img class="hero-wordmark" src="assets/brand-calligraphy.png" alt="香宁普洱府" width="1183" height="259">
         <h1 id="hero-title">雨林藏韵，<br>茶香入宁。</h1>
-        <p class="hero-description">循着版纳的绿意，遇见一盏普洱。</p>
-        <a class="button hero-button" href="#collection">浏览茶品 <span aria-hidden="true">↗</span></a>
+        <p class="hero-description">从一块普洱茶砖，到一席待客好茶。</p>
+        <a class="button hero-button" href="#explore">跟着茶香看看 <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
-    <section class="about shell section" id="about" aria-labelledby="about-title">
-      <div class="section-lead about-lead">
-        <div><p class="eyebrow">关于香宁</p><h2 id="about-title">一盏普洱，一席相聚</h2></div>
-        <p>香宁茶业有限公司专注普洱茶。茶桌、茶器与一杯热茶，是香宁待客的日常。从一盏茶开始，慢慢认识普洱的不同滋味。</p>
-      </div>
-      <div class="space-gallery">
-        <figure class="space-photo space-main">
-          <img src="assets/photos/tea-room.webp" alt="暖色光线下摆有木桌与茶具的茶室" width="1200" height="900" loading="lazy" decoding="async">
-          <figcaption>品茶空间</figcaption>
-        </figure>
-        <figure class="space-photo space-side">
-          <img src="assets/photos/tea-display.webp" alt="圆窗旁以暖光照亮的茶饼陈列架" width="1200" height="900" loading="lazy" decoding="async">
-          <figcaption>茶品陈列</figcaption>
-        </figure>
+    <section class="discover shell" id="explore" aria-labelledby="explore-title">
+      <h2 id="explore-title">今天，想看哪一盏？</h2>
+      <div class="discover-grid">
+        <a class="discover-card" href="#collection" data-start-filter="tea">
+          <img src="assets/photos/tea-brick-close.webp" width="960" height="640" alt="" decoding="async">
+          <span>看看香宁的茶 <b aria-hidden="true">↗</b></span>
+        </a>
+        <a class="discover-card" href="#collection" data-start-filter="gift">
+          <img src="assets/photos/gift-box-open.webp" width="960" height="720" alt="" decoding="async">
+          <span>打开一盒茶礼 <b aria-hidden="true">↗</b></span>
+        </a>
+        <a class="discover-card" href="#about">
+          <img src="assets/photos/tea-table.webp" width="720" height="960" alt="" decoding="async">
+          <span>走近香宁茶席 <b aria-hidden="true">↗</b></span>
+        </a>
       </div>
     </section>
 
     <section class="collection section" id="collection" aria-labelledby="collection-title">
       <div class="shell">
         <div class="section-lead collection-lead">
-          <div><p class="eyebrow">产品实拍</p><h2 id="collection-title">一叶茶集</h2></div>
+          <div><p class="eyebrow">产品实拍</p><h2 id="collection-title">一叶茶集</h2><p class="catalog-count" role="status" hidden></p></div>
           <div class="tabs" role="group" aria-label="筛选产品" hidden>
             <button type="button" data-filter="all" aria-pressed="true">全部</button>
             <button type="button" data-filter="tea" aria-pressed="false">茶品</button>
@@ -135,6 +136,24 @@
             <p class="product-copy">深色方盒，包装正面印有「茶膏」字样。</p>
           </article>
         </div>
+        <a class="continue-link" href="#about">接着看香宁的茶空间 <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="about shell section" id="about" aria-labelledby="about-title">
+      <div class="section-lead about-lead">
+        <div><p class="eyebrow">关于香宁</p><h2 id="about-title">一盏普洱，一席相聚</h2></div>
+        <p>香宁茶业有限公司专注普洱茶。来看看茶室里的长桌、茶具与一排排茶饼，认识香宁平日怎样摆茶、待客。</p>
+      </div>
+      <div class="space-gallery">
+        <figure class="space-photo space-main">
+          <img src="assets/photos/tea-room.webp" alt="暖色光线下摆有木桌与茶具的茶室" width="1200" height="900" loading="lazy" decoding="async">
+          <figcaption>品茶空间</figcaption>
+        </figure>
+        <figure class="space-photo space-side">
+          <img src="assets/photos/tea-display.webp" alt="圆窗旁以暖光照亮的茶饼陈列架" width="1200" height="900" loading="lazy" decoding="async">
+          <figcaption>茶品陈列</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -188,7 +207,13 @@
       <h2 id="dialog-title">产品实拍</h2>
       <form method="dialog"><button class="close" aria-label="关闭大图">×</button></form>
     </div>
-    <img id="dialog-photo" alt="">
+    <div class="dialog-picture"><img id="dialog-photo" alt=""></div>
+    <p id="dialog-caption" class="dialog-caption"></p>
+    <div class="dialog-controls">
+      <button type="button" data-photo-step="-1"><span aria-hidden="true">←</span> 上一款</button>
+      <p id="dialog-count" role="status"></p>
+      <button type="button" data-photo-step="1">下一款 <span aria-hidden="true">→</span></button>
+    </div>
   </dialog>
   <script src="app.js" defer></script>
 </body>
