@@ -176,6 +176,8 @@ html:not(.catalog-enhanced) .product-open { height: auto; }
 .product-specs thead th { background: #e9eee5; }
 .product-specs th small { display: block; font-weight: 400; }
 .product-specs td { white-space: nowrap; }
+.product-specs .price-source { display: block; color: var(--muted); font-size: 11px; line-height: 1.4; white-space: normal; }
+.product-specs th[scope="row"] { overflow-wrap: anywhere; }
 .product-note { margin-top: 8px; color: var(--muted); font-size: 13px; }
 .continue-link { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; margin-top: 28px; padding-bottom: 3px; border-bottom: 1px solid #859486; font-weight: 650; }
 .continue-link:hover { color: #a6263a; }
@@ -297,6 +299,8 @@ details[open] summary::after { content: '−'; }
   .product-frame { padding: 4px; }
   .product-heading { padding: 9px 9px 10px; }
   .product-price { font-size: 16px; }
+  .product-specs th, .product-specs td { padding-inline: 4px; }
+  .product-specs td:nth-child(2) { white-space: normal; }
   html:not(.catalog-enhanced) .tea-grid { grid-template-columns: 1fr; }
   .banna-grid, .culture { grid-template-columns: 1fr; gap: 22px; }
   .banna-art { padding: 22px 15px; }
