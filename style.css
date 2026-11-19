@@ -87,13 +87,6 @@ h2 { font: 600 clamp(29px, 4vw, 49px)/1.36 var(--serif); letter-spacing: .045em;
 }
 .hero-inner { padding-block: 54px 66px; }
 .hero-eyebrow { color: #f0d7a5; margin-bottom: 19px; }
-.hero-wordmark {
-  width: clamp(164px, 18vw, 253px);
-  height: auto;
-  margin: 0 0 22px;
-  filter: invert(1);
-  mix-blend-mode: screen;
-}
 h1 { font: 500 clamp(53px, 6.2vw, 96px)/1.18 var(--serif); letter-spacing: .055em; }
 .hero-accent { color: #f0ddad; }
 .hero-description { color: #f5ecda; margin-top: 23px; font-size: clamp(15px, 1.6vw, 18px); letter-spacing: .055em; }
@@ -162,9 +155,9 @@ h1 { font: 500 clamp(53px, 6.2vw, 96px)/1.18 var(--serif); letter-spacing: .055e
 .banna::before, .contact::before { content: ''; position: absolute; inset: 0 0 auto; height: 18px; background: url('assets/banna-pattern.svg') repeat-x center / 88px 23px; opacity: .68; pointer-events: none; }
 .banna-grid { display: grid; align-items: center; grid-template-columns: .8fr 1.2fr; gap: 9%; }
 .banna-copy > p:not(.eyebrow) { margin-top: 20px; }
-.banna-art { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 22px; padding: 28px 27px; border: 1px solid #b5a27c; outline: 1px solid #ccbda2; outline-offset: 5px; background: #faf2e3; }
-.banna-lettering { width: 100%; height: auto; mix-blend-mode: multiply; }
-.banna-seals { width: clamp(70px, 9vw, 108px); height: auto; padding-inline-start: 14px; border-inline-start: 1px solid #cdbb9d; mix-blend-mode: multiply; }
+.banna-art { display: grid; justify-items: center; gap: 10px; padding: 35px 20px; border: 1px solid #b5a27c; outline: 1px solid #ccbda2; outline-offset: 5px; background: #faf2e3; text-align: center; }
+.banna-art > span { font: 650 clamp(34px, 5.2vw, 70px)/1.25 var(--serif); letter-spacing: .14em; text-indent: .14em; }
+.banna-art > small { color: #775831; font-size: 11px; letter-spacing: .27em; text-indent: .27em; }
 
 .culture { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 8%; }
 .culture-visual img { width: 100%; height: auto; aspect-ratio: 1.25; object-fit: cover; object-position: 57% 50%; }
@@ -250,7 +243,6 @@ details > p { padding: 0 12px 15px 0; color: var(--muted); font-size: 14px; line
   .hero::before { background: linear-gradient(0deg, #081c15f2, #0b251bc0 35%, #0b251b1c 88%); }
   .hero-inner { padding-block: 72px 40px; }
   .hero-eyebrow { font-size: 10px; margin-bottom: 14px; }
-  .hero-wordmark { margin-bottom: 16px; }
   h1 { font-size: clamp(44px, 10.7vw, 65px); }
   .hero-description { margin-top: 15px; }
   .hero-button { margin-top: 22px; }
@@ -273,8 +265,7 @@ details > p { padding: 0 12px 15px 0; color: var(--muted); font-size: 14px; line
   .product-copy { padding-inline: 9px; font-size: 12px; }
   .product-zoom { right: 5px; bottom: 5px; width: 27px; height: 27px; font-size: 12px; }
   .banna-grid, .culture { grid-template-columns: 1fr; gap: 22px; }
-  .banna-art { padding: 18px 15px; gap: 11px; }
-  .banna-seals { width: 60px; padding-inline-start: 8px; }
+  .banna-art { padding: 22px 15px; }
   .culture-visual img { aspect-ratio: 1.55; }
   .contact-inner { padding-block: 46px 36px; }
   .phone-button { width: 100%; }
