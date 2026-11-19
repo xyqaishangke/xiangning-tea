@@ -206,6 +206,7 @@ details[open] summary::after { content: '−'; }
 .contact { position: relative; background: var(--green); color: var(--paper); }
 .contact-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 23px; padding-block: 63px 56px; }
 .contact-inner p { margin-top: 10px; color: #e0e6d9; }
+.contact-methods { display: flex; flex-wrap: wrap; gap: 12px; }
 .phone-button { min-width: 224px; background: #f8edda; color: var(--green); }
 .phone-button small { display: block; font-size: 12px; letter-spacing: .12em; }
 .phone-button strong { font-size: 20px; letter-spacing: .045em; }
@@ -306,7 +307,7 @@ details[open] summary::after { content: '−'; }
   .banna-art { padding: 22px 15px; }
   .culture-visual img { aspect-ratio: 1.55; }
   .contact-inner { padding-block: 46px 36px; }
-  .phone-button { width: 100%; }
+  .contact-methods, .phone-button { width: 100%; }
   .footer-inner { display: grid; grid-template-columns: 1fr auto; gap: 0 10px; padding-block: 16px; }
   .footer-note { grid-row: 2; }
   .back-top { grid-column: 2; grid-row: 1 / span 2; }
