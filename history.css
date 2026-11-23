@@ -1,0 +1,35 @@
+.history {
+  background: #eee8db;
+  color: var(--ink);
+  border-block: 1px solid #d9cdb9;
+  padding-block: clamp(38px, 5.8vw, 84px);
+}
+.history-grid { display: grid; grid-template-columns: .83fr 1.17fr; gap: clamp(26px, 6vw, 84px); }
+.history-intro { align-self: start; }
+.history-intro .eyebrow { font-size: .875rem; }
+.history-intro h2 { font-size: clamp(31px, 4.25vw, 56px); letter-spacing: .035em; }
+.history-period { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0 14px; color: #795433; font: 650 1.125rem/1.4 var(--serif); font-variant-numeric: tabular-nums; }
+.history-period span { border-inline-start: 1px solid #bba484; padding-inline-start: 10px; font: 500 .875rem/1.4 var(--sans); }
+.history-lede { max-width: 23em; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+.history-list { margin: 0; padding: 0 0 0 19px; list-style: none; border-inline-start: 1px solid #a38861; }
+.history-event { position: relative; padding: 0 0 24px 5px; }
+.history-event::before { content: ''; position: absolute; top: 13px; left: -24px; width: 8px; height: 8px; border: 1px solid #956e40; border-radius: 50%; background: #eee8db; }
+.history-event time { color: #795433; font: 650 1.55rem/1.25 var(--serif); font-variant-numeric: tabular-nums; }
+.history-event time span { margin-inline-start: 5px; font-size: .875rem; }
+.history-event h3 { margin: 3px 0 0; font: 650 clamp(17px, 2vw, 23px)/1.4 var(--serif); }
+.history-event p { margin-top: 5px; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.history-photo { margin-top: 12px; max-width: 510px; }
+.history-photo img { width: 100%; height: auto; border: 1px solid #c8b99d; }
+.history-photo figcaption { margin-top: 5px; color: #67513c; font-size: .875rem; }
+.history-more { border: 1px solid #b7a688; background: #f8f3e8; }
+.history-more summary { padding-inline: 14px; min-height: 48px; }
+.history-more summary:hover { background: #ece3d0; }
+.history-more .history-list { margin: 6px 13px 0 16px; }
+.history-open, .history-more[open] .history-closed { display: none; }
+.history-more[open] .history-open { display: inline; }
+.history-entry { display: flex; flex-wrap: wrap; gap: 0 18px; }
+@media (max-width: 760px) {
+  .history-grid { grid-template-columns: 1fr; gap: 23px; }
+  .history-period { margin: 8px 0 10px; }
+  .history-event { padding-bottom: 20px; }
+}
