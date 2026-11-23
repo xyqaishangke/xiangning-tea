@@ -12,9 +12,9 @@
   <meta property="og:url" content="https://xyqaishangke.github.io/xiangning-tea/">
   <link rel="canonical" href="https://xyqaishangke.github.io/xiangning-tea/">
   <link rel="icon" type="image/png" href="assets/xiangning-logo.png">
-  <link rel="stylesheet" href="style.css?v=ui2">
-  <link rel="stylesheet" href="history.css?v=ui2">
-  <link rel="stylesheet" href="tea-team.css?v=ui2">
+  <link rel="stylesheet" href="style.css?v=ui3">
+  <link rel="stylesheet" href="history.css?v=ui3">
+  <link rel="stylesheet" href="tea-team.css?v=ui3">
   <title>西双版纳香宁茶文化传播中心</title>
 </head>
 <body id="home">
@@ -50,7 +50,7 @@
         </div>
       </div>
       <figure class="hero-portrait">
-        <img class="hero-image" src="assets/xiangning-storefront.webp" alt="香宁茶文化传播中心门面，木门敞开，两侧挂着红灯笼" width="1448" height="1086" fetchpriority="high">
+        <img class="hero-image" src="assets/storefront-1200.webp" srcset="assets/storefront-720.webp 720w, assets/storefront-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 850px) calc(100vw - 46px), (max-width: 1260px) 52vw, 650px" alt="香宁茶文化传播中心门面，木门敞开，两侧挂着红灯笼" width="1200" height="705" fetchpriority="high">
       </figure>
     </section>
 
@@ -1375,17 +1375,25 @@
           <a class="button phone-button" href="tel:+866912193366" aria-label="拨打香宁商务电话 0691-2193366">
             <span><small>商务电话</small><strong>0691-2193366</strong></span><span aria-hidden="true">↗</span>
           </a>
-          <a class="button phone-button" href="tel:+8613759446817" aria-label="拨打手机 13759446817，微信同号">
+          <a class="button phone-button" href="tel:+8613759446817" aria-label="拨打手机 13759446817，微信同号" id="wechat-number">
             <span><small>手机 / 微信同号</small><strong>13759446817</strong></span><span aria-hidden="true">↗</span>
           </a>
+          <button type="button" class="copy-wechat" data-copy-wechat hidden>复制微信号</button>
         </div>
+        <p class="contact-feedback" role="status" aria-atomic="true"></p>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="shell footer-inner">
       <p>香宁茶业有限公司</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#collection">一叶茶集</a>
+        <a href="#history">发展历程</a>
+        <a href="#tea-team">茶艺师团队</a>
+        <a href="#contact">联系香宁</a>
+      </nav>
       <a href="#home" class="back-top">返回顶部 <span aria-hidden="true">↑</span></a>
     </div>
   </footer>
@@ -1393,7 +1401,12 @@
   <dialog id="tea-dialog" class="photo-dialog" aria-labelledby="dialog-title">
     <div class="dialog-header">
       <h2 id="dialog-title">产品实拍</h2>
-      <form method="dialog"><button class="close" aria-label="关闭大图">×</button></form>
+      <form method="dialog"><button class="close" aria-label="关闭茶品详情">×</button></form>
+    </div>
+    <div class="dialog-share">
+      <button type="button" class="copy-product" hidden>复制茶品链接</button>
+      <a class="product-permalink" href="#collection" hidden>茶品直达链接</a>
+      <p class="share-feedback" role="status" aria-atomic="true"></p>
     </div>
     <div class="dialog-body">
       <div id="dialog-detail" class="dialog-detail"></div>
@@ -1421,6 +1434,6 @@
       <button type="button" data-archive-step="1">下一张</button>
     </div>
   </dialog>
-  <script src="app.js?v=ui2" defer></script>
+  <script src="app.js?v=ui3" defer></script>
 </body>
 </html>

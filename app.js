@@ -33,6 +33,31 @@ header.addEventListener('keydown', event => {
   }
 });
 
+const sectionLinks = [...nav.querySelectorAll('a[href^="#"]')]
+  .map(link => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+  .filter(item => item.section)
+  .sort((a, b) => a.section.compareDocumentPosition(b.section) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
+let navFrame = 0;
+let currentSectionLink;
+function markCurrentSection() {
+  navFrame = 0;
+  const line = header.getBoundingClientRect().bottom + 24;
+  const visible = sectionLinks.filter(({ section }) => section.getBoundingClientRect().top <= line);
+  const atEnd = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight) <= 2;
+  const current = (atEnd ? sectionLinks.at(-1) : visible.at(-1))?.link;
+  if (current === currentSectionLink) return;
+  currentSectionLink?.removeAttribute('aria-current');
+  current?.setAttribute('aria-current', 'location');
+  currentSectionLink = current;
+}
+function scheduleSectionMark() {
+  if (!navFrame) navFrame = requestAnimationFrame(markCurrentSection);
+}
+window.addEventListener('scroll', scheduleSectionMark, { passive: true });
+window.addEventListener('resize', scheduleSectionMark);
+window.addEventListener('pageshow', scheduleSectionMark);
+scheduleSectionMark();
+
 const tabs = document.querySelector('.tabs');
 const tools = document.querySelector('.catalog-tools');
 const filters = [...tabs.querySelectorAll('[data-filter]')];
@@ -89,7 +114,7 @@ function revealLinkedProduct() {
     limit = Math.ceil((products.indexOf(product) + 1) / increment) * increment;
     renderCatalog();
   }
-  product.querySelector('.product-detail').scrollIntoView();
+  requestAnimationFrame(() => product.querySelector('.product-open').scrollIntoView({ block: 'start' }));
 }
 revealLinkedProduct();
 window.addEventListener('hashchange', revealLinkedProduct);
@@ -123,13 +148,47 @@ const title = document.querySelector('#dialog-title');
 const photo = document.querySelector('#dialog-photo');
 const detail = document.querySelector('#dialog-detail');
 const galleryCount = document.querySelector('#dialog-count');
+const copyProductButton = dialog.querySelector('.copy-product');
+const productPermalink = dialog.querySelector('.product-permalink');
+const shareFeedback = dialog.querySelector('.share-feedback');
+const copyWechatButton = document.querySelector('[data-copy-wechat]');
+const contactFeedback = document.querySelector('.contact-feedback');
 const photoButtons = [...document.querySelectorAll('.product-open')];
 let gallery = [];
 let activePhoto = 0;
 
+const clipboardAvailable = typeof navigator.clipboard?.writeText === 'function';
+productPermalink.hidden = clipboardAvailable;
+copyProductButton.hidden = !clipboardAvailable;
+copyWechatButton.hidden = !clipboardAvailable;
+copyWechatButton.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(document.querySelector('#wechat-number strong').textContent.trim());
+    contactFeedback.textContent = '微信号已复制，可以到微信里粘贴搜索。';
+  } catch {
+    contactFeedback.textContent = '无法自动复制，请长按上方号码复制。';
+  }
+});
+copyProductButton.addEventListener('click', async () => {
+  const url = productPermalink.href;
+  try {
+    await navigator.clipboard.writeText(url);
+    if (productPermalink.href === url && dialog.open) shareFeedback.textContent = '已复制，可以发给朋友。';
+  } catch {
+    if (productPermalink.href !== url || !dialog.open) return;
+    productPermalink.hidden = false;
+    shareFeedback.textContent = '无法自动复制，请长按直达链接复制。';
+  }
+});
+
 function showPhoto() {
   const button = gallery[activePhoto];
   title.textContent = button.querySelector('.product-title').textContent;
+  const shareUrl = new URL(document.querySelector('link[rel="canonical"]').href);
+  shareUrl.hash = button.hash;
+  productPermalink.href = shareUrl.href;
+  productPermalink.hidden = clipboardAvailable;
+  shareFeedback.textContent = '';
   const source = button.closest('.product-card').querySelector('.product-detail');
   const specs = source.querySelector('.product-specs')?.cloneNode(true);
   const notes = [...source.children].filter(item => !item.matches('.product-specs'));
@@ -167,7 +226,7 @@ dialog.querySelectorAll('[data-photo-step]').forEach(button => {
 });
 dialog.addEventListener('keydown', event => {
   const step = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
-  if (step !== undefined) {
+  if (step !== undefined && gallery.length > 1) {
     event.preventDefault();
     movePhoto(step);
   }
