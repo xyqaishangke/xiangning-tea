@@ -34,13 +34,6 @@
   text-align: center;
   font: 650 clamp(17px, 2.3vw, 23px)/1.4 var(--serif);
 }
-@media (min-width: 761px) {
-  .navigation { column-gap: clamp(12px, 1.9vw, 30px); }
-}
-@media (min-width: 761px) and (max-width: 850px) {
-  .navigation { column-gap: 11px; }
-  .header-inner { gap: 12px; }
-}
 @media (min-width: 921px) and (max-width: 1020px) {
   .brand > span { font-size: 18px; }
   .header-inner { gap: 20px; }

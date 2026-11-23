@@ -12,9 +12,9 @@
   <meta property="og:url" content="https://xyqaishangke.github.io/xiangning-tea/">
   <link rel="canonical" href="https://xyqaishangke.github.io/xiangning-tea/">
   <link rel="icon" type="image/png" href="assets/xiangning-logo.png">
-  <link rel="stylesheet" href="style.css?v=storefront">
-  <link rel="stylesheet" href="history.css?v=archive">
-  <link rel="stylesheet" href="tea-team.css">
+  <link rel="stylesheet" href="style.css?v=ui2">
+  <link rel="stylesheet" href="history.css?v=ui2">
+  <link rel="stylesheet" href="tea-team.css?v=ui2">
   <title>西双版纳香宁茶文化传播中心</title>
 </head>
 <body id="home">
@@ -29,6 +29,7 @@
       <nav id="navigation" class="navigation" aria-label="主导航">
         <a href="#collection">一叶茶集</a>
         <a href="#about">关于香宁</a>
+        <a href="#history">发展历程</a>
         <a href="#tea-team">茶艺师团队</a>
         <a href="#banna">版纳茶韵</a>
         <a href="#culture">品茶知味</a>
@@ -43,7 +44,10 @@
         <p class="hero-eyebrow"><span>西双版纳香宁茶文化传播中心</span><span class="hero-official">官网</span></p>
         <h1 id="hero-title"><span>山间一片叶，</span><wbr><span>香宁一席茶</span></h1>
         <p class="hero-description">循着茶香走进香宁，喝一盏普洱，听一段版纳茶事。</p>
-        <a class="button hero-button" href="#collection">逛逛香宁茶集</a>
+        <div class="hero-actions">
+          <a class="button hero-button" href="#collection">逛逛香宁茶集</a>
+          <a class="button hero-secondary" href="#history">了解香宁历程</a>
+        </div>
       </div>
       <figure class="hero-portrait">
         <img class="hero-image" src="assets/xiangning-storefront.webp" alt="香宁茶文化传播中心门面，木门敞开，两侧挂着红灯笼" width="1448" height="1086" fetchpriority="high">
@@ -75,6 +79,14 @@
           <p>从香宁经典、霞夫人系列到云南名山古树。按系列慢慢看，点开每款可读风味、规格与标价。</p>
         </div>
         <div class="catalog-tools" hidden>
+          <form class="catalog-search" role="search">
+            <label for="catalog-query">搜索茶品</label>
+            <div class="catalog-search-field">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
+              <input id="catalog-query" type="search" placeholder="例如：冰岛、熟茶、77克" autocomplete="off">
+              <button class="catalog-clear" type="button" hidden>清空</button>
+            </div>
+          </form>
           <div class="tabs" role="group" aria-label="按系列筛选产品">
             <button type="button" data-filter="all" aria-pressed="true">全部</button>
             <button type="button" data-filter="classic" aria-pressed="false">香宁经典</button>
@@ -84,13 +96,7 @@
             <button type="button" data-filter="paste" aria-pressed="false">茶膏</button>
             <button type="button" data-filter="gift" aria-pressed="false">茶礼</button>
           </div>
-          <div class="catalog-find">
-            <form class="catalog-search" role="search">
-              <label for="catalog-query">搜索茶品</label>
-              <input id="catalog-query" type="search" placeholder="例如：冰岛、熟茶、77克" autocomplete="off">
-            </form>
-            <p class="catalog-count" role="status"></p>
-          </div>
+          <p class="catalog-count" role="status" aria-atomic="true"></p>
         </div>
         <p class="catalog-note">门店价依据 2026年5月1日起执行的价目表；未列入该表的规格标注「原手册参考」。购买前请致电确认现价与库存。</p>
         <div class="tea-grid" id="catalog-products">
@@ -1032,7 +1038,7 @@
             </div>
           </article>
         </div>
-        <p class="catalog-empty" hidden>没有找到符合条件的茶品。试试其他关键词，或切换到「全部」。</p>
+        <div class="catalog-empty" hidden><p>没有找到符合条件的茶品。可以试试其他关键词。</p><button type="button" class="catalog-reset">查看全部茶品</button></div>
         <div class="catalog-actions" hidden>
           <button class="catalog-more" type="button" aria-controls="catalog-products">查看更多茶品</button>
         </div>
@@ -1389,15 +1395,32 @@
       <h2 id="dialog-title">产品实拍</h2>
       <form method="dialog"><button class="close" aria-label="关闭大图">×</button></form>
     </div>
-    <div class="dialog-picture"><img id="dialog-photo" alt=""></div>
-    <div id="dialog-detail" class="dialog-detail"></div>
-    <p class="dialog-contact"><a href="tel:+866912193366">商务电话 0691-2193366</a><a href="tel:+8613759446817">手机 / 微信同号 13759446817</a><small>购买前请确认现价与库存</small></p>
+    <div class="dialog-body">
+      <div id="dialog-detail" class="dialog-detail"></div>
+      <div class="dialog-picture"><img id="dialog-photo" alt=""></div>
+      <p class="dialog-contact"><a href="tel:+866912193366">商务电话 0691-2193366</a><a href="tel:+8613759446817">手机 / 微信同号 13759446817</a><small>购买前请确认现价与库存</small></p>
+    </div>
     <div class="dialog-controls">
       <button type="button" data-photo-step="-1"><span aria-hidden="true">←</span> 上一款</button>
       <p id="dialog-count" role="status"></p>
       <button type="button" data-photo-step="1">下一款 <span aria-hidden="true">→</span></button>
     </div>
   </dialog>
-  <script src="app.js?v=tea-catalog" defer></script>
+  <dialog id="archive-dialog" class="photo-dialog archive-dialog" aria-labelledby="archive-dialog-title">
+    <div class="dialog-header">
+      <h2 id="archive-dialog-title">香宁档案照片</h2>
+      <form method="dialog"><button class="close" type="submit" aria-label="关闭照片">×</button></form>
+    </div>
+    <figure>
+      <img id="archive-dialog-image" alt="">
+      <figcaption id="archive-dialog-caption"></figcaption>
+    </figure>
+    <div class="dialog-controls">
+      <button type="button" data-archive-step="-1">上一张</button>
+      <p id="archive-dialog-count" role="status"></p>
+      <button type="button" data-archive-step="1">下一张</button>
+    </div>
+  </dialog>
+  <script src="app.js?v=ui2" defer></script>
 </body>
 </html>

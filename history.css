@@ -28,7 +28,7 @@
 .history-open, .history-more[open] .history-closed { display: none; }
 .history-more[open] .history-open { display: inline; }
 .history-entry { display: flex; flex-wrap: wrap; gap: 0 18px; }
-.history-jump { display: block; width: fit-content; margin-top: 5px; padding-block: 8px; text-decoration: underline; text-underline-offset: 4px; }
+.history-jump { display: inline-flex; align-items: center; min-height: 44px; margin-top: 5px; text-decoration: underline; text-underline-offset: 4px; }
 .history-archive { grid-column: 1 / -1; }
 .history-archive h3 { font: 650 clamp(24px, 3vw, 34px)/1.35 var(--serif); margin: 0; scroll-margin-top: 7px; }
 .archive-intro { color: var(--muted); font-size: 1rem; margin: 6px 0 16px; }

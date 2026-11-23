@@ -3,14 +3,29 @@ const menu = document.querySelector('.menu');
 const nav = document.querySelector('#navigation');
 
 function toggleMenu(expanded) {
+  if (menu.getAttribute('aria-expanded') === String(expanded)) return;
   menu.setAttribute('aria-expanded', String(expanded));
+  menu.firstChild.textContent = expanded ? '关闭菜单 ' : '菜单 ';
   menu.querySelector('span').textContent = expanded ? '×' : '☰';
 }
 
 header.classList.add('enhanced');
 menu.hidden = false;
 menu.addEventListener('click', () => toggleMenu(menu.getAttribute('aria-expanded') === 'false'));
-nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', event => {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (menu.getAttribute('aria-expanded') === 'true') {
+    const section = document.querySelector(link.hash);
+    if (section) section.setAttribute('tabindex', '-1');
+  }
+  toggleMenu(false);
+}));
+document.addEventListener('click', event => {
+  if (!header.contains(event.target)) toggleMenu(false);
+});
+header.addEventListener('focusout', event => {
+  if (event.relatedTarget && !header.contains(event.relatedTarget)) toggleMenu(false);
+});
 header.addEventListener('keydown', event => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
     toggleMenu(false);
@@ -24,6 +39,7 @@ const filters = [...tabs.querySelectorAll('[data-filter]')];
 const products = [...document.querySelectorAll('.product-card')];
 const catalogCount = document.querySelector('.catalog-count');
 const catalogQuery = document.querySelector('#catalog-query');
+const catalogClear = document.querySelector('.catalog-clear');
 const catalogEmpty = document.querySelector('.catalog-empty');
 const catalogActions = document.querySelector('.catalog-actions');
 const more = catalogActions.querySelector('button');
@@ -40,6 +56,7 @@ const searchText = new Map(products.map(product => [product, normalize(product.t
 
 function renderCatalog() {
   const terms = catalogQuery.value.trim().split(/\s+/).filter(Boolean).map(normalize);
+  catalogClear.hidden = catalogQuery.value.length === 0;
   filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
   matching = products.filter(product => (
     (category === 'all' || product.dataset.type.split(' ').includes(category))
@@ -82,6 +99,17 @@ document.querySelectorAll('[data-start-filter]').forEach(link => link.addEventLi
   setFilter(link.dataset.startFilter);
 }));
 catalogQuery.addEventListener('input', () => { limit = increment; renderCatalog(); });
+catalogClear.addEventListener('click', () => {
+  catalogQuery.value = '';
+  limit = increment;
+  catalogQuery.focus();
+  renderCatalog();
+});
+catalogEmpty.querySelector('.catalog-reset').addEventListener('click', () => {
+  catalogQuery.value = '';
+  catalogQuery.focus();
+  setFilter('all');
+});
 catalogQuery.form.addEventListener('submit', event => event.preventDefault());
 more.addEventListener('click', () => {
   const firstNew = matching[limit];
@@ -103,7 +131,9 @@ function showPhoto() {
   const button = gallery[activePhoto];
   title.textContent = button.querySelector('.product-title').textContent;
   const source = button.closest('.product-card').querySelector('.product-detail');
-  detail.replaceChildren(...Array.from(source.children, item => item.cloneNode(true)));
+  const specs = source.querySelector('.product-specs')?.cloneNode(true);
+  const notes = [...source.children].filter(item => !item.matches('.product-specs'));
+  detail.replaceChildren(...(specs ? [specs] : []), ...notes.map(item => item.cloneNode(true)));
   photo.alt = button.querySelector('img').alt;
   photo.src = button.dataset.photo;
   galleryCount.textContent = `${activePhoto + 1} / ${gallery.length}`;
@@ -149,3 +179,38 @@ dialog.addEventListener('click', event => {
   if (event.clientX < bounds.left || event.clientX > bounds.right
     || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
 });
+
+const archiveDialog = document.querySelector('#archive-dialog');
+if (typeof archiveDialog?.showModal === 'function') {
+  const archivePhoto = archiveDialog.querySelector('img');
+  const archiveCaption = archiveDialog.querySelector('figcaption');
+  const archiveCount = archiveDialog.querySelector('#archive-dialog-count');
+  let photos = [];
+  let active = 0;
+  function showArchivePhoto(index) {
+    active = (index + photos.length) % photos.length;
+    const link = photos[active];
+    archivePhoto.src = link.href;
+    archiveCaption.textContent = link.closest('figure').querySelector('figcaption').textContent;
+    archiveCount.textContent = `第 ${active + 1} 张，共 ${photos.length} 张`;
+    archiveDialog.scrollTop = 0;
+  }
+  document.querySelectorAll('.archive-photo a').forEach(link => {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      photos = [...link.closest('.archive-group').querySelectorAll('.archive-photo a')];
+      showArchivePhoto(photos.indexOf(link));
+      archiveDialog.showModal();
+    });
+  });
+  archiveDialog.querySelectorAll('[data-archive-step]').forEach(button => {
+    button.addEventListener('click', () => showArchivePhoto(active + Number(button.dataset.archiveStep)));
+  });
+  archiveDialog.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    showArchivePhoto(active + (event.key === 'ArrowLeft' ? -1 : 1));
+  });
+}
