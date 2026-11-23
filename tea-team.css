@@ -1,0 +1,52 @@
+.tea-team {
+  background: #eee9dd;
+  padding-block: clamp(34px, 5vw, 70px);
+  border-top: 1px solid #dbcfb8;
+}
+.tea-team h2 { text-align: center; }
+.tea-team h2::after {
+  content: '';
+  display: block;
+  width: 32px;
+  margin: 13px auto 24px;
+  border-bottom: 1px solid var(--gold);
+}
+.team-profiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 290px));
+  justify-content: center;
+  gap: clamp(13px, 2.5vw, 32px);
+}
+.team-profile { min-width: 0; background: #faf5e9; border: 1px solid #d0c2a8; }
+.team-portrait {
+  display: grid;
+  place-items: center;
+  margin: 8px 8px 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #e7ddc9;
+  color: #674f37;
+  font-size: .875rem;
+}
+.team-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+.team-profile figcaption {
+  padding: 11px 6px;
+  text-align: center;
+  font: 650 clamp(17px, 2.3vw, 23px)/1.4 var(--serif);
+}
+@media (min-width: 761px) {
+  .navigation { column-gap: clamp(12px, 1.9vw, 30px); }
+}
+@media (min-width: 761px) and (max-width: 850px) {
+  .navigation { column-gap: 11px; }
+  .header-inner { gap: 12px; }
+}
+@media (min-width: 921px) and (max-width: 1020px) {
+  .brand > span { font-size: 18px; }
+  .header-inner { gap: 20px; }
+}
+@media (max-width: 600px) {
+  .team-profiles { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .team-profile:only-child { grid-column: 1 / -1; width: min(100%, 230px); justify-self: center; }
+  .team-portrait { margin: 5px 5px 0; }
+}
